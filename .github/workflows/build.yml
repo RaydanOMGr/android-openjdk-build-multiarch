@@ -4,8 +4,6 @@ on:
   push:
   pull_request:
   workflow_dispatch:
-  schedule:
-    - cron: "0 1 1 */2 *"
 
 jobs:
   build_android:
@@ -60,8 +58,11 @@ jobs:
       fail-fast: false
 
     name: "Build Java ${{ matrix.version }} for iOS aarch64"
-    runs-on: MacStadium
+    runs-on: macos-latest
     continue-on-error: true
+    env:
+      LANG: en_US.UTF-8
+      LC_ALL: en_US.UTF-8
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
